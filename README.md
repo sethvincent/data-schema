@@ -2,6 +2,12 @@
 
 > Defines & manages the properties – the columns – of tabular data using json-schema
 
+## install
+
+```
+npm i --save data-schema
+```
+
 ## properties format
 
 Properties are stored in this format:
