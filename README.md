@@ -47,13 +47,13 @@ You end up with a json-schema that looks something like this:
 
 Internally this module uses [is-my-json-valid](http://npmjs.org/is-my-json-valid) to validate data.
 
-## var schema = require('data-schema-tabular')(options)
+## `var schema = require('data-schema-tabular')(options)`
 
 **options:**  
   - schema: the full json schema object for the tabular data
   - static: default is false. if true, properties can't be added, removed, or updated
 
-## schema.create(property)
+## `schema.create(property)`
 
 Example:
 
@@ -64,7 +64,7 @@ schema.create({
 })
 ```
 
-## schema.get(key)
+## `schema.get(key)`
 
 Example:
 
@@ -72,7 +72,7 @@ Example:
 var property = schema.get(key)
 ```
 
-## schema.update(property)
+## `schema.update(property)`
 
 Example:
 
@@ -85,7 +85,7 @@ var property = schema.update({
 
 key is required for updating a property
 
-## schema.delete(key)
+## `schema.delete(key)`
 
 Example:
 
@@ -93,7 +93,7 @@ Example:
 schema.delete(key)
 ```
 
-## schema.validate(data)
+## `schema.validate(data)`
 
 Example:
 
@@ -108,7 +108,7 @@ var validated = schema.validateProperty(property.key, 'this is a string')
 validated // -> true
 ```
 
-## schema.validateProperty(key, value)
+## `schema.validateProperty(key, value)`
 
 ```
 var data = [
@@ -126,11 +126,11 @@ var validated = schema.validate({
 validated // -> true
 ```
 
-## schema.all()
+## `schema.all()`
 
 Returns object of all properties
 
-## schema.newRow()
+## `schema.newRow()`
 
 Returns object with keys for all properties in the schema and default values
 

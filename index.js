@@ -72,7 +72,7 @@ module.exports = function (options) {
     return validate(data)
   }
 
-  schema.newRow = function newRow () {
+  schema.row = schema.newRow = function newRow () {
     var row = {}
     var properties = this.all()
 
