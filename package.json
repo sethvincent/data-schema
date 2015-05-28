@@ -1,7 +1,7 @@
 {
   "name": "data-schema",
   "description": "",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": {
     "url": "git://github.com/sethvincent/data-schema.git"
   },

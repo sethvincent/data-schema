@@ -87,11 +87,53 @@ key is required for updating a property
 
 ## schema.delete(key)
 
+Example:
+
+```
+schema.delete(key)
+```
+
 ## schema.validate(data)
+
+Example:
+
+```
+var property = schema.create({
+  name: 'validatethis',
+  type: 'string'
+})
+
+var validated = schema.validateProperty(property.key, 'this is a string')
+
+validated // -> true
+```
 
 ## schema.validateProperty(key, value)
 
+```
+var data = [
+  {
+    'test': 'string',
+    'validatethis': 'string'
+  }
+]
+
+var validated = schema.validate({
+  test: 'cool',
+  validatethis: 'ok'
+})
+
+validated // -> true
+```
+
 ## schema.all()
 
+Returns object of all properties
+
+## schema.newRow()
+
+Returns object with keys for all properties in the schema and default values
+
 ## License
+
 MIT

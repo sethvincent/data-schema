@@ -82,3 +82,9 @@ test('validate array of data', function (t) {
   t.ok(validated)
   t.end()
 })
+
+test('new row', function (t) {
+  var row = schema.newRow()
+  t.ok(row)
+  t.end()
+})

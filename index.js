@@ -72,6 +72,17 @@ module.exports = function (options) {
     return validate(data)
   }
 
+  schema.newRow = function newRow () {
+    var row = {}
+    var properties = this.all()
+
+    for (var property in properties) {
+      row[property] = properties[property].default
+    }
+
+    return row
+  }
+
   return schema
 }
 
