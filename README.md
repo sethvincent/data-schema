@@ -1,6 +1,6 @@
-# data-schema-tabular
+# data-schema
 
-> Defines & manages the properties – the columns – of tabular data using json-schema
+Defines & manages the properties – the columns – of tabular data using json-schema
 
 ## install
 
