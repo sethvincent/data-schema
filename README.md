@@ -47,11 +47,17 @@ You end up with a json-schema that looks something like this:
 
 Internally this module uses [is-my-json-valid](http://npmjs.org/is-my-json-valid) to validate data.
 
-## `var schema = require('data-schema-tabular')(options)`
+## Usage & API
+
+## `var dataSchema = require('data-schema')`
+
+### `var schema = dataSchema(options)`
 
 **options:**  
   - schema: the full json schema object for the tabular data
   - static: default is false. if true, properties can't be added, removed, or updated
+
+## Methods
 
 ## `schema.create(property)`
 
@@ -133,6 +139,12 @@ Returns object of all properties
 ## `schema.newRow()`
 
 Returns object with keys for all properties in the schema and default values
+
+## Properties
+
+## `schema.schema`
+
+The json schema representation of your tabular data.
 
 ## License
 
