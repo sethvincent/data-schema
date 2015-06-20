@@ -140,6 +140,14 @@ Returns object of all properties
 
 Returns object with keys for all properties in the schema and default values
 
+## `schema.addProperty(property)`
+
+Add a property. Will create a new one or update an existing one depending on if the property has a key.
+
+## `schema.addProperties(properties)`
+
+Add an array or object of properties to the schema. Internally uses `schema.addProperty()`.
+
 ## Properties
 
 ## `schema.schema`

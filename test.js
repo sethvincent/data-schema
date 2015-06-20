@@ -103,3 +103,31 @@ test('property has key, name, type, and default', function (t) {
   t.ok(property.key)
   t.end()
 })
+
+test('init schema with some properties', function (t) {
+  var props = { 
+    cib5i9b9n0000z7wmf1exfi7z: { 
+      name: '1',
+      type: 'string',
+      key: 'cib5i9b9n0000z7wmf1exfi7z',
+      default: null 
+    },
+    cib5i9b9p0001z7wme2n3kja5: { 
+      name: '2',
+      type: 'string',
+      key: 'cib5i9b9p0001z7wme2n3kja5',
+      default: 'wat'
+    },
+    cib5i9b9p0002z7wmqp6ttma6: { 
+      name: 'test',
+      type: 'string',
+      key: 'cib5i9b9p0002z7wmqp6ttma6',
+      default: null
+    }
+  }
+
+  var newSchema = require('./index')({ properties: props })
+  var savedProps = newSchema.all()
+  t.equal(Object.keys(savedProps).length, 3)
+  t.end()
+})
