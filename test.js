@@ -88,3 +88,18 @@ test('new row', function (t) {
   t.ok(row)
   t.end()
 })
+
+test('property has key, name, type, and default', function (t) {
+  var property = schema.create({
+    name: 'coolnumber',
+    type: 'number',
+    default: 3
+  })
+
+  t.ok(property)
+  t.equals(property.name, 'coolnumber')
+  t.equals(property.type, 'number')
+  t.equals(property.default, 3)
+  t.ok(property.key)
+  t.end()
+})
