@@ -89,8 +89,8 @@ DataSchema.prototype.addProperties = function (properties) {
 }
 
 DataSchema.prototype.addProperty = function (property) {
-  var propFound = !(this.get(property.key) instanceof Error)
-  if (property.key && propFound) this.update(property)
+  var existing = this.find(property)
+  if (existing) this.update(property)
   else this.create(property)
 }
 
@@ -104,6 +104,18 @@ DataSchema.prototype.newRow = function newRow () {
   }
 
   return row
+}
+
+DataSchema.prototype.find = function (id) {
+  var all = this.all()
+  var name = id.name ? id.name : id
+  var propkey = id.key ? id.key : id
+
+  for (key in all) {
+    var nameMatch = all[key].name === name
+    var keyMatch = all[key].key === propkey
+    if (nameMatch || keyMatch) return all[key]
+  }
 }
 
 function error () {

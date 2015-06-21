@@ -131,3 +131,9 @@ test('init schema with some properties', function (t) {
   t.equal(Object.keys(savedProps).length, 3)
   t.end()
 })
+
+test('find a property by name', function (t) {
+  var property = schema.find('test')
+  t.equal(property.name, 'test')
+  t.end()
+})
