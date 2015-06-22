@@ -20,7 +20,7 @@ function DataSchema (options) {
   }
 
   this.staticProperties = options.static
-  this.schema = defaultSchema || options.schema
+  this.schema = options.schema || defaultSchema
   if (options.properties) this.addProperties(options.properties)
 }
 
