@@ -121,6 +121,7 @@ DataSchema.prototype.find = function (id) {
 }
 
 DataSchema.prototype.map = function (id, data) {
+  var self = this
   var mapped = {}
 
   var keys = Object.keys(data)
