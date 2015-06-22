@@ -2,6 +2,8 @@ var validator = require('is-my-json-valid')
 var each = require('each-async')
 var isarray = require('isarray')
 var extend = require('extend')
+var type = require('type-of')
+var isCuid = require('is-cuid')
 var cuid = require('cuid')
 
 module.exports = DataSchema
@@ -26,7 +28,7 @@ function DataSchema (options) {
 
 DataSchema.prototype.create = function create (property) {
   if (this.staticProperties) return error()
-  var key = property.key = cuid()
+  var key = (property.key = property.key || cuid())
   if (!property.type) property.type = 'string'
   if (!property.default) property.default = null
   return this.schema.items.properties[key] = property
@@ -115,6 +117,62 @@ DataSchema.prototype.find = function (id) {
     var nameMatch = all[key].name === name
     var keyMatch = all[key].key === propkey
     if (nameMatch || keyMatch) return all[key]
+  }
+}
+
+DataSchema.prototype.map = function (id, data) {
+  var mapped = {}
+
+  var keys = Object.keys(data)
+  keys.forEach(function (key) {
+    var prop = self.find(key)
+
+    if (id === 'key') {
+      if (!isCuid(key)) {
+        mapped[prop['key']] = data[key]
+      }
+    }
+
+    if (id === 'name') {
+      if (isCuid(key)) {
+        mapped[prop['name']] = data[key]
+      }
+    }
+  })
+
+  return mapped
+}
+
+DataSchema.prototype.format = function (data) {
+  var formatted = {}
+  var self = this
+
+  var keys = Object.keys(data)
+  keys.forEach(function (key) {
+    var prop = self.find(key)
+    
+    if (!isCuid(key)) {
+      if (!prop) {
+        prop = self.inferType(key, data[key])
+        self.addProperty(prop)
+      }
+
+        data[prop.key] = data[key]
+        delete data[key]
+    }
+  })
+
+  return extend(this.row(), data, formatted)
+}
+
+DataSchema.prototype.inferType = function (key, value) {
+  var datatype = type(value)
+
+  return {
+    key: cuid(),
+    name: key,
+    type: [datatype, 'null'],
+    default: null
   }
 }
 
