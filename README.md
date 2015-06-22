@@ -16,11 +16,9 @@ Properties are stored in this format:
 {
   'unique key': {
     type: 'type of the property. string, integer, etc.'
-    properties: {
-      key: 'unique key',
-      name: 'Human identifier, renamable',
-      default: 'a default value'
-    }
+    key: 'unique key',
+    name: 'Human identifier, renamable',
+    default: 'a default value'
   }
 }
 ```
