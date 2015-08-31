@@ -1,5 +1,4 @@
 var validator = require('is-my-json-valid')
-var each = require('each-async')
 var isarray = require('isarray')
 var extend = require('extend')
 var type = require('type-of')
@@ -13,10 +12,10 @@ function DataSchema (options) {
   options = options || { static: false }
 
   var defaultSchema = {
-    title: "Tabular data properties",
-    type: "array",
+    title: 'Tabular data properties',
+    type: 'array',
     items: {
-      type: "object",
+      type: 'object',
       properties: {}
     }
   }
@@ -31,7 +30,8 @@ DataSchema.prototype.create = function create (property) {
   var key = (property.key = property.key || cuid())
   if (!property.type) property.type = 'string'
   if (!property.default) property.default = null
-  return this.schema.items.properties[key] = property
+  this.schema.items.properties[key] = property
+  return property
 }
 
 DataSchema.prototype.get = function get (key) {
@@ -44,7 +44,7 @@ DataSchema.prototype.update = function update (property) {
   if (this.staticProperties) return error()
   if (!property.key) return new Error('key required')
   if (!this.schema.items.properties[property.key]) return new Error('property not found')
-  var property = extend(this.schema.items.properties[property.key], property)
+  property = extend(this.schema.items.properties[property.key], property)
   return property
 }
 
@@ -78,12 +78,10 @@ DataSchema.prototype.addProperties = function (properties) {
     var l = properties.length
     var i = 0
 
-    for (i; i<l; i++) {
+    for (i; i < l; i++) {
       this.addProperty(properties[i])
     }
-  }
-
-  else if (typeof properties === 'object') {
+  } else if (typeof properties === 'object') {
     for (var property in properties) {
       this.addProperty(properties[property])
     }
@@ -92,11 +90,11 @@ DataSchema.prototype.addProperties = function (properties) {
 
 DataSchema.prototype.addProperty = function (property) {
   var existing = this.find(property)
-  if (existing) this.update(property)
-  else this.create(property)
+  if (existing) return this.update(property)
+  return this.create(property)
 }
 
-DataSchema.prototype.row = 
+DataSchema.prototype.row =
 DataSchema.prototype.newRow = function newRow () {
   var row = {}
   var properties = this.all()
@@ -113,7 +111,7 @@ DataSchema.prototype.find = function (id) {
   var name = id.name ? id.name : id
   var propkey = id.key ? id.key : id
 
-  for (key in all) {
+  for (var key in all) {
     var nameMatch = all[key].name === name
     var keyMatch = all[key].key === propkey
     if (nameMatch || keyMatch) return all[key]
@@ -151,15 +149,15 @@ DataSchema.prototype.format = function (data) {
   var keys = Object.keys(data)
   keys.forEach(function (key) {
     var prop = self.find(key)
-    
+
     if (!isCuid(key)) {
       if (!prop) {
         prop = self.inferType(key, data[key])
         self.addProperty(prop)
       }
 
-        data[prop.key] = data[key]
-        delete data[key]
+      data[prop.key] = data[key]
+      delete data[key]
     }
   })
 

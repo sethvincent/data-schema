@@ -1,7 +1,7 @@
 {
   "name": "data-schema",
   "description": "Defines & manages the properties – the columns – of tabular data using json-schema",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "repository": {
     "url": "git://github.com/sethvincent/data-schema.git"
   },
