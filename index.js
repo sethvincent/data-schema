@@ -147,6 +147,7 @@ DataSchema.prototype.format = function (data) {
   var self = this
 
   var keys = Object.keys(data)
+  console.log('keys', keys)
   keys.forEach(function (key) {
     var prop = self.find(key)
 
@@ -156,12 +157,11 @@ DataSchema.prototype.format = function (data) {
         self.addProperty(prop)
       }
 
-      data[prop.key] = data[key]
-      delete data[key]
+      formatted[prop.key] = data[key]
     }
   })
 
-  return extend(this.row(), data, formatted)
+  return extend(this.row(), formatted)
 }
 
 DataSchema.prototype.inferType = function (key, value) {
