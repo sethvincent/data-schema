@@ -147,7 +147,6 @@ DataSchema.prototype.format = function (data) {
   var self = this
 
   var keys = Object.keys(data)
-  console.log('keys', keys)
   keys.forEach(function (key) {
     var prop = self.find(key)
 
